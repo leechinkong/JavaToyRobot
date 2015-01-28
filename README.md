@@ -1,13 +1,18 @@
 # JavaToyRobot
 Simulation of a toy robot moving on a square tabletop written in Java.
 
-The application can read in commands of the following form -
+The application can read in commands of the following form:
 - PLACE X,Y,F
 - MOVE
 - LEFT
 - RIGHT
 - REPORT
-- QUIT
+- QUIT (additional command for gracefully exit the application)
+
+Constraints
+---------
+- Commands are case-insensitive but must follow the exact format, e.g. X,Y,F of the PLACE command must be comma separated.
+- All invalid commands are ignored.
 
 Requirements
 ---------
