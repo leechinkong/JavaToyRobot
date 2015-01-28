@@ -15,10 +15,46 @@ public class ToyRobot
 	}
 	
 	/**
-	 * Validate input command.
+	 * Process input command string.
 	 */
-	public boolean validate(String command)
+	public void process(String cmdStr)
 	{
-		return false;
+		Command cmd = null;
+		if(cmdStr != null)
+		{
+			// to upper case
+			// trim leading and trailing spaces
+			cmdStr = cmdStr.toUpperCase().trim();
+			
+			// validate command
+			cmd = Command.validate(cmdStr);
+			if(cmd != null) 
+			{
+				switch (cmd)
+				{
+					case PLACE:
+						// trim off the PLACE command
+						final String placeArgs = cmdStr.substring(Command.PLACE.toString().length());
+						// find out the x,y and face
+						final String[] args = placeArgs.split(",");
+						final int x = Integer.valueOf(args[0].trim());
+						final int y = Integer.valueOf(args[1].trim());
+						final Face face = Face.valueOf(args[2].trim());
+						break;
+					case MOVE:
+						
+						break;
+					case LEFT:
+						
+						break;
+					case RIGHT:
+						
+						break;
+					case REPORT:
+						
+						break;
+				}
+			}
+		}
 	}
 }
