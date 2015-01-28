@@ -1,5 +1,7 @@
 package com.lck.toyrobot;
 
+import java.util.Scanner;
+
 
 /**
  * ToyRobot main class
@@ -9,11 +11,30 @@ package com.lck.toyrobot;
  */
 public class ToyRobot
 {
+	/** Special command for gracefully exit the program */
+	private static final String QUIT = "QUIT";
+	
+	/**
+	 * Program entry point.
+	 * @param args not used
+	 */
 	public static void main(String[] args)
 	{
-		// TODO
 		System.out.println("===== Toy Robot Simulator =====");
-
+		System.out.println("Enter commands to move the robot (enter QUIT to exit):");
+		final ToyRobot toyRobot = new ToyRobot();
+		
+		// request input
+		@SuppressWarnings("resource")
+		final Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		while(input != null && !QUIT.equalsIgnoreCase(input.trim()))
+		{
+			toyRobot.process(input);
+			
+			// continue to read input
+			input = scanner.nextLine();
+		}
 	}
 	
 	/** Toy robot controller instance */
@@ -65,7 +86,11 @@ public class ToyRobot
 						controller.turn(Command.RIGHT);
 						break;
 					case REPORT:
-						System.out.println(controller.report());
+						final String output = controller.report();
+						if(output != null)
+						{
+							System.out.println(controller.report());
+						}
 						break;
 				}
 			}
