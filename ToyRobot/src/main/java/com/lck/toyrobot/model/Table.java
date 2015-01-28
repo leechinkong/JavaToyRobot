@@ -27,7 +27,7 @@ public class Table
 	 */
 	public boolean validate(int x, int y)
 	{
-		//TODO
-		return false;
+		return x >= 0 && x < dimensionX &&
+				y >= 0 && y < dimensionY;
 	}
 }

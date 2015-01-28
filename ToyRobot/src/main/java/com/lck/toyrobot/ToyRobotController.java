@@ -3,6 +3,13 @@ package com.lck.toyrobot;
 import com.lck.toyrobot.model.Robot;
 import com.lck.toyrobot.model.Table;
 
+/**
+ * 
+ * Toy robot controller containing logic to control robot movement
+ * 
+ * @author lee
+ *
+ */
 public class ToyRobotController
 {
 	/** Default table x dimension */
@@ -11,8 +18,12 @@ public class ToyRobotController
 	/** Default table y dimension */
 	public static final int DIMENSION_Y = 5;
 	
+	/** Table instance */
 	private Table table;
+	
+	/** Robot instance */
 	private Robot robot;
+	
 	/**
 	 * Construct toy robot controller
 	 */
@@ -36,6 +47,13 @@ public class ToyRobotController
 				// construct the robot
 				robot = new Robot(x, y, face);
 			}
+			else
+			{
+				// update robot
+				robot.setX(x);
+				robot.setY(y);
+				robot.setFace(face);
+			}
 		}
 	}
 	
@@ -47,7 +65,32 @@ public class ToyRobotController
 		// robot is null when not yet placed
 		if(robot != null)
 		{
+			// calculate the new x,y
+			int x = robot.getX();
+			int y = robot.getY();
+			switch (robot.getFace())
+			{
+				case NORTH:
+					y++;
+					break;
+				case EAST:
+					x++;
+					break;
+				case SOUTH:
+					y--;
+					break;
+				case WEST:
+					x--;
+					break;
+			}
 			
+			// validate x,y
+			if(table.validate(x, y))
+			{
+				// update robot's position
+				robot.setX(x);
+				robot.setY(y);
+			}
 		}
 	}
 	
@@ -60,12 +103,14 @@ public class ToyRobotController
 		// robot is null when not yet placed
 		if(robot != null)
 		{
-			
+			final Face currentFace = robot.getFace();
+			robot.setFace(currentFace.turn(turnCmd));
 		}
 	}
 	
 	/**
 	 * Report position and face
+	 * @return the report output
 	 */
 	public String report()
 	{	
@@ -74,7 +119,7 @@ public class ToyRobotController
 		// robot is null when not yet placed
 		if(robot != null)
 		{
-			
+			output = String.format("Output: %d,%d,%s", robot.getX(), robot.getY(), robot.getFace());
 		}
 		
 		return output;
