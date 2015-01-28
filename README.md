@@ -7,7 +7,7 @@ The application can read in commands of the following form:
 - LEFT
 - RIGHT
 - REPORT
-- QUIT (additional command for gracefully exit the application)
+- QUIT (additional command to gracefully exit the application)
 
 Constraints
 ---------
