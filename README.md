@@ -22,7 +22,7 @@ Requirements
 Compilation
 ---------
 - Check out the source and run the following from the ToyRobot directory:
-  - mvm compile
+  - mvn compile
 
 Execution
 ---------
